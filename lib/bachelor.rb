@@ -31,5 +31,5 @@ end
 
 def get_average_age_for_season(data, season)
   allSeasons = data.values.flat_map{|n| n}
-   allSeasons.reduce{|sum, n| sum=sum+n["age"].to_i}
+   allSeasons.reduce{|sum, n| sum=sum+n["age"]}
 end
