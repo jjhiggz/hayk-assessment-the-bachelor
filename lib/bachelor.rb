@@ -28,8 +28,19 @@ def get_occupation(data, hometown)
   allSeasons = data.values.flat_map{|n| n}
   allSeasons.find{|n|n["hometown"]==hometown}["occupation"]
 end
+def roundup(float)
+  if (float-float.to_i) * (float-float.to_i) < 0.49999999999999999999
+    float = float+0.5
+  end
+  return float.round(0).to_i
+end 
 
 def get_average_age_for_season(data, season)
-  allSeasons = data.values.flat_map{|n| n}
-   allSeasons.reduce{|sum, n| sum=sum+n["age"]}
+  seasonContestants = data[season]
+
+  allAgesAdded = seasonContestants.reduce(0)do |sum, n| 
+  sum = sum + n["age"].to_i
+  end
+  numberOfContestants = seasonContestants.length
+  return (allAgesAdded.to_f/numberOfContestants.to_f).round(0)
 end
